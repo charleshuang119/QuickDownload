@@ -4,11 +4,16 @@
 <h1>{{search}}</h1>
 {% for item in range (0,21)%}
 {% if '{}'.format(item) in all_item%}
-<p> {{all_item.get('{}'.format(item))['title']}}</p>
-<p> {{all_item.get('{}'.format(item))['link']}}</p>
-<p> {{all_item.get('{}'.format(item))['img']}}</p>
-<p> {{all_item.get('{}'.format(item))['time']}}</p>
-<p> ------------------------------------------</p>
+<div class="card mt-3" style="width: 25rem;margin: 0 auto;">
+  <a href="{{all_item.get('{}'.format(item))['link']}}"> <img class="card-img-top" src="{{all_item.get('{}'.format(item))['img']}}" alt="Card image cap"></a>
+  <div class="card-body">
+    <a href="{{all_item.get('{}'.format(item))['link']}}"> <h5 class="card-title">{{all_item.get('{}'.format(item))['title']}}</h5></a>
+      <p class="card-text">
+        <small class="text-muted">{{all_item.get('{}'.format(item))['time']}}</small>
+      </p>
+  </div>
+</div>
+
 {%endif%}
 {%endfor%}
 {%endblock%}

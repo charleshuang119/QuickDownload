@@ -17,4 +17,4 @@ def result_page():
     return render_template("result.html",search=search,all_item = all_item )
 
 if __name__=="__main__":
-    app.run()
+    app.run(debug=True)

@@ -17,7 +17,7 @@ def find_video(soup,all_item,i=1):
         img_value=element.get('href').split("=")[1]
         all_img=soup.find_all('img',{"alt":True,"width":True,"height":True,"onload":True})
         #Insert the image value into href to get full address of image #delete char ([,",',]), since image return a list, which has []
-        img=str(re.findall("https://i.ytimg.com/vi/{}/[\S]+".format(img_value),str(all_img).strip("[\"\']")))
+        img=str(re.findall("https://i.ytimg.com/vi/{}/[\S]+".format(img_value),str(all_img))).strip("[\"\']")
         video_img = img.replace("&amp;","&")
         all_item['{}'.format(i)] = {"title":video_title,"link":"https://www.youtube.com{}".format(video_link),"img":video_img}
         i=i+1
