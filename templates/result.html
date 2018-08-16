@@ -2,11 +2,13 @@
 {% extends "base.html"%}
 {%block content %}
 <h1>{{search}}</h1>
+<!--<div class="row">-->
 {% for item in range (0,21)%}
 {% if '{}'.format(item) in all_item%}
-<div class="card mt-3" style="width: 25rem;margin: 0 auto;">
+{% if (all_item.get('{}'.format(item))['img']!='') and (all_item.get('{}'.format(item))['time']!='') %}
+<div class="card col-md-3 col-md-offset-1 mg-sm" style="width:25rem; margin: 0 auto;">
   <a href="{{all_item.get('{}'.format(item))['link']}}">
-    <img class="card-img-top" src="{{all_item.get('{}'.format(item))['img']}}" alt="Card image cap">
+    <img class="card-img-top" src="{{all_item.get('{}'.format(item))['img']}}" alt="Card image cap" width ="196" height="140">
   </a>
   <div class="card-body">
     <a href="{{all_item.get('{}'.format(item))['link']}}">
@@ -15,9 +17,34 @@
     <p class="card-text">
         <small class="text-muted">{{all_item.get('{}'.format(item))['time']}}</small>
     </p>
+      <!--after click, turn to a blank page-->
+      <form action="/download" target="_blank">
+          <button type="submit" class="btn btn-danger"   name="value" value="MP4&{{all_item.get('{}'.format(item))['link']}}">MP4</button>
+          <button type="submit" class="btn btn-warning"  name="value" value="MP3&{{all_item.get('{}'.format(item))['link']}}">MP3</button>
+      </form>
   </div>
 </div>
-
+{%endif%}
 {%endif%}
 {%endfor%}
+<!--</div>-->
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item active"><a class="page-link" href="#">1<span class="sr-only">(current)</span></a></li>
+        {% for page in range (0,8)%}
+        {% if '{}'.format(page) in all_page%}
+        <li class="page-item ">
+            <a class="page-link" href="{{all_page.get('{}'.format(page))}}&current_page={{page}}">{{page}} </a>
+        </li>
+        {%endif%}
+        {%endfor%}
+        <li class="page-item">
+            <a class="page-link" href="{{all_page.get('2')}}">
+                <span aria-hidden="true"> &raquo;</span>
+            </a>
+        </li>
+
+    </ul>
+</nav>
+
 {%endblock%}
